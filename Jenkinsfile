@@ -2,16 +2,29 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
-                echo 'Repository checked out successfully'
+                git branch: 'main',
+                url: 'git@github.com:kiranmarishetti/k8s-ecommerce-project.git'
             }
         }
 
-        stage('Verify Project') {
+        stage('Verify Files') {
             steps {
-                sh 'pwd'
                 sh 'ls -la'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                echo "Docker build stage"
+            }
+        }
+
+        stage('Deploy Kubernetes') {
+            steps {
+                sh 'kubectl get nodes'
             }
         }
     }
